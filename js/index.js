@@ -5,15 +5,27 @@ let darkMode = document.querySelector(".header");
 let body = document.querySelector("body");
 let val = "";
 
-// for player adding to list
-addBtn.addEventListener("click", () => {
-  inputVal.value && (val += `<li> ${inputVal.value} </li>`);
+// utils
+function addItem() {
+  inputVal.value && (val += `<li >${inputVal.value} <button>X</button></li>`);
   playerList.innerHTML = val;
   inputVal.value = "";
+}
+
+// adding manually
+addBtn.addEventListener("click", addItem);
+
+// adding by Enter Button
+document.addEventListener("keydown", (e) => {
+  e.key === "Enter" && addItem();
+});
+
+// deleting
+playerList.addEventListener("click", (e) => {
+  playerList.removeChild(e.target.parentNode);
 });
 
 // for dark mode
-
 darkMode.addEventListener("click", () => {
   body.classList.toggle("dark");
 });
